@@ -32,7 +32,7 @@ bool hasCycle(struct ListNode *head) {
     struct ListNode *slow = head;
     struct ListNode *fast = head->next;
     while (slow != head) {
-        if (slow == NULL || slow->next == NULL) {
+        if (fast == NULL || fast->next == NULL) {
             return false;
         }
         slow = slow->next;
@@ -43,7 +43,16 @@ bool hasCycle(struct ListNode *head) {
 ```
 
 This would be the two-pointer approach.
-This will have a complexity of: O(1)
+
+**Complexity analysis:**  
+
+* List has no Cycle:  
+    The faster pointer reaches the end first and the runtime depends on the lists length which is O(n)
+
+* List has a cycle:
+    We break down the movement of the slow pointer into two steps, the non-cyclic part and the cyclic.  
+    1. The slow pointer takes the "non-cyclic" length steps to enter the cycle. At this point the fast pointer already reached the cycle. **Number of Iterations = non-cyclic length = N**.  
+    2. Both pointers are now in the cycle. The fast runner moves 2 steps at a time and the slow one 1 step at a time, so the speed difference is 1. So it takes **distance between the two/speed difference** loops for the fast runner to catch up to the 
 
 
 ## 

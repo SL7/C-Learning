@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include "singly_linked_list.h"
 
-
 node * LinkedList() {
     return NULL;
 }
@@ -91,7 +90,6 @@ int del(node **list, int index) {
 
 void show(node *list) {
     node *cur = (node *) NULL;
-    node test;
     cur = list;
     printf("#");
     while (cur != NULL) {
@@ -99,4 +97,39 @@ void show(node *list) {
         cur = cur->next;
     }
     printf("\n");
+}
+
+void showReversed(node *list) {
+    node *cur = (node *) NULL;
+    int *temp, count = 0;
+    cur = list;
+    while(cur != NULL) {
+       cur = cur->next;
+       count++; 
+    }
+    temp = malloc(count * sizeof(int));
+    cur = list;
+    count = 0;
+    while(cur != NULL) {
+        temp[count++] = cur->val;
+        cur = cur->next;
+    }
+    printf("# ");
+    for (count--;count >= 0; count--) {
+        printf("%d # ", temp[count]);
+    }
+    printf("\n");
+}
+
+int numElements(node *list) {
+    node *cur = malloc(sizeof(node));
+    int count = 0;
+    cur = list;
+
+    while (cur != NULL) {
+        count++;
+        cur = cur->next;
+    }
+    return count;
+
 }

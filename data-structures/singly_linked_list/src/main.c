@@ -13,6 +13,8 @@ int main(void) {
     insertAt(&list, 0, 20);
     insertEnd(&list, 22);
     printf("%d\n", getAt(list, 0));
-    show(list); 
+    show(list);
+    showReversed(list);
+    printf("Elements count: %d\n", numElements(list));
     return 0;
 }
