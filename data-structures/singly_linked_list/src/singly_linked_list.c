@@ -15,7 +15,7 @@ int insertHead(node **list, int val) {
 }
 
 int insertAt(node **list, int index, int val) {
-    node * cur = malloc(sizeof(node));
+    node *cur = malloc(sizeof(node));
     node *temp = malloc(sizeof(node));
     temp->val = val;
     int i;
@@ -132,4 +132,29 @@ int numElements(node *list) {
     }
     return count;
 
+}
+
+node* reverse(node *list) {
+    
+    node *temp = malloc(sizeof(node));
+    node *new = malloc(sizeof(node));
+    node *prev_head = malloc(sizeof(node));
+    int i;
+    i = 0;
+    while(list->next != NULL) {
+        temp = list->next;
+        list->next = list->next->next;
+        if (i == 0) {
+            prev_head = list;
+        } else {
+            prev_head = new;    
+        }
+        new = temp;
+        new->next = prev_head;
+        i++;
+    }
+    if (i == 0) {
+        return list;
+    }
+    return new;
 }

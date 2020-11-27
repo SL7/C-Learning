@@ -12,9 +12,15 @@ int main(void) {
     del(&list, 0);
     insertAt(&list, 0, 20);
     insertEnd(&list, 22);
-    printf("%d\n", getAt(list, 0));
+    printf("\n%d\n\n", getAt(list, 0));
     show(list);
     showReversed(list);
-    printf("Elements count: %d\n", numElements(list));
+    printf("\n");
+    printf("Elements count: %d\n\n", numElements(list));
+    list = reverse(list);
+    show(list);
+    showReversed(list);
+    printf("\n");
+    printf("%d\n\n", getAt(list, 1));
     return 0;
 }

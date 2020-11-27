@@ -24,5 +24,6 @@ int getAt(node *list, int index);
 
 int numElements(node *list);
 
+node* reverse(node *list);
 
 #endif
