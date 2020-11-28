@@ -1,42 +1,45 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-typedef enum {
-    STATE_SWITCH_ERR,
-    STATE_RESET_ERR
-}STATE_ERR;
-
-typedef enum {
-    IDLE,
-    SELF_CHECK,
-    STARTUP,
-    COMMAND,
-    PRE_FLIGHT_CHECK,
-    ASCEND,
-    DESCEND,
-    RECOVERY,
-    ERROR
-}STATES;
-
-STATES set_state(STATES new_state);
-
-char states[9][255] = {"IDLE", "SELF_CHECK", "STARTUP", "COMMAND", "PRE_FLIGHT_CHECK", "ASCEND", "DESCEND", "RECOVERY", "ERROR"};
-char **test_states = malloc(9 * 255 * sizeof(char));
-
+#include "sb_machine.h"
 
 int main() {
-    STATES state = IDLE;
-    switch(state) {
-        case IDLE:
-            printf("%s\n", states[IDLE]);  
-            break;
-        default:
-            printf("no matching state\n");
+    sb_state state = set_state(sb_IDLE);
+
+    while(1) {
+        switch(state) {
+            case sb_IDLE:
+                sbIdleStateHandler(&state, "command");
+                printf("%d\n", state);
+                break;
+            case sb_SELF_CHECK:
+                sbSelfCheckStateHandler(&state);
+                break;
+            case sb_STARTUP:
+                sbStartupStateHandler(&state);
+                break;
+            case sb_PRE_FLIGHT_CHECK:
+                sbPreFlightCheckStateHandler(&state);
+                break;
+            case sb_FLIGHT_START:
+                sbFlightStartStateHandler(&state);
+                break;
+            case sb_ASCEND:
+                sbAscendStateHandler(&state);
+                break;
+            case sb_DESCEND:
+                sbDescendStateHandler(&state);
+                break;
+            case sb_RECOVERY:
+                sbRecoveryStateHandler(&state);
+                break;
+            case sb_ERROR:
+                sbErrorHandler(&state);
+                break;
+            default:
+                printf("No matching State");
+                exit(1);
+        }
     }
 }
 
-
-STATES set_state(STATES new_state) {
-    return new_state;
-}
 
