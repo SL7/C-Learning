@@ -37,7 +37,10 @@ sb_state_err sbIdleStateHandler(sb_state *state, char* mode) {
  * Handler for self check state
  */
 sb_state_err sbSelfCheckStateHandler(sb_state *state) {
-    printf("Self Check\n");
+    printf("======| Self Check |======\n");
+    while(1) {
+         
+    }
     return sb_SUCCESS;
 }
 
