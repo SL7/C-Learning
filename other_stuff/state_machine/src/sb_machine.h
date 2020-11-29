@@ -16,7 +16,6 @@ typedef enum {
     sb_IDLE,
     sb_SELF_CHECK,
     sb_STARTUP,
-    sb_PRE_FLIGHT_CHECK,
     sb_FLIGHT_START,
     sb_ASCEND,
     sb_DESCEND,
@@ -31,7 +30,6 @@ sb_state set_state(sb_state new_state);
 sb_state_err sbIdleStateHandler(sb_state *state, char* mode);
 sb_state_err sbSelfCheckStateHandler(sb_state *state);
 sb_state_err sbStartupStateHandler(sb_state *state);
-sb_state_err sbPreFlightCheckStateHandler(sb_state *state);
 sb_state_err sbFlightStartStateHandler(sb_state *state);
 sb_state_err sbAscendStateHandler(sb_state *state);
 sb_state_err sbDescendStateHandler(sb_state *state);

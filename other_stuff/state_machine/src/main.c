@@ -9,16 +9,12 @@ int main() {
         switch(state) {
             case sb_IDLE:
                 sbIdleStateHandler(&state, "command");
-                printf("%d\n", state);
                 break;
             case sb_SELF_CHECK:
                 sbSelfCheckStateHandler(&state);
                 break;
             case sb_STARTUP:
                 sbStartupStateHandler(&state);
-                break;
-            case sb_PRE_FLIGHT_CHECK:
-                sbPreFlightCheckStateHandler(&state);
                 break;
             case sb_FLIGHT_START:
                 sbFlightStartStateHandler(&state);
