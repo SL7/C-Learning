@@ -3,7 +3,10 @@
 #include <string.h>
 #include "sb_fsm.h"
 
-
+/**
+ * Idle state to take commands
+ * @returns sbTransition - Transition code
+ */
 sbTransition sbIdleState(void) {
     int err = 1;  
     while(1) {
@@ -25,6 +28,14 @@ sbTransition sbIdleState(void) {
     }
 }
 
+/**
+ * Self Test or Self Diagnosis Check to test if all the 
+ * components are working well
+ * <br>
+ * Returns <sbSelfTestOK> on success,
+ * <sbErr> on failure
+ * @returns sbTransition - Transition code
+ */
 sbTransition sbSelfTestState(void) {
     int err = 0;
     while (1) {
@@ -62,19 +73,19 @@ sbTransition sbFlightStartState(void) {
 }
 
 sbTransition sbAscendState(void) {
-    int err = 0;
-    while (1) {
-        printf("Ascend State\n");
-        if (err == 0) {
-            return sbAscendOK;
-        } else {
-            return sbErr;
-        }
+    int err = 1;
+    printf("Ascend State\n");
+    if (err == 0) {
+        return sbAscendOK;
+    } else if (err == 1) {
+        return sbRepeat;
+    } else {
+        return sbErr;
     }
 }
 
 sbTransition sbDescendState(void) {
-    int err = 1;
+    int err = 0;
     while (1) {
         printf("Descend State\n");
         if (err == 0) {
@@ -105,11 +116,26 @@ sbTransition sbErrorState(void) {
     }
 }
 
+sbTransition sbEndState(void) {
+    printf("Accepted\n");
+    char *input = malloc(255 * sizeof(char));
+    while(1) {
+        printf("> ");
+        scanf("%s", input);
+        getc(stdin); 
+        if (strcmp(input, "restart") == 0) {
+            return sbEndOK;
+        }
+    }
+    return sbErr;
+}
+
+
 sbState fetchNextState(sbState state, sbTransition ret) {
     
     int i,j;
     i = 0;
-    while (i < sizeof(states[state].transitions)) {
+    while (i < sizeof(states[state].transitions)/sizeof(sbStateTrans)) {
         if (ret == states[state].transitions[i].trans) {
             return states[state].transitions[i].state;
         }
