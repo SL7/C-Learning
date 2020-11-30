@@ -49,14 +49,14 @@ sbState fetchNextState(sbState, sbTransition);
 
 
 static sbStateDef states[8] = {
-    {"Idle", sbIdleState,                {{sbStartupTrans, sbStartup}, {sbSelfTestTrans, sbSelfTest}}},
-    {"Self Test", sbSelfTestState,       {{sbStartupTrans, sbStartup}, {sbErr, sbIdle}}},
-    {"Startup", sbStartupState,          {{sbStartupOK, sbFlightStart}, {sbErr, sbIdle}}},
-    {"Flight Start", sbFlightStartState, {{sbFlightStartOK, sbAscend}, {sbErr, sbError}}},
-    {"Ascend", sbAscendState,            {{sbAscendOK, sbDescend}, {sbErr, sbError}}},
-    {"Descend", sbDescendState,          {{sbDescendOK, sbRecovery}, {sbErr, sbError}}},
-    {"Recovery", sbRecoveryState,        {{sbRecoveryOK, sbIdle}, {sbErr, sbError}}},
-    {"Error", sbErrorState,              {{sbAny, sbError}}}
+    {"Idle", sbIdleState,               {{sbStartupTrans, sbStartup}, {sbSelfTestTrans, sbSelfTest}}},
+    {"Self Test", sbSelfTestState,      {{sbStartupTrans, sbStartup}, {sbErr, sbIdle}}},
+    {"Startup", sbStartupState,         {{sbStartupOK, sbFlightStart}, {sbErr, sbIdle}}},
+    {"Flight Start", sbFlightStartState,{{sbFlightStartOK, sbAscend}, {sbErr, sbError}}},
+    {"Ascend", sbAscendState,           {{sbAscendOK, sbDescend}, {sbErr, sbError}}},
+    {"Descend", sbDescendState,         {{sbDescendOK, sbRecovery}, {sbErr, sbError}}},
+    {"Recovery", sbRecoveryState,       {{sbRecoveryOK, sbIdle}, {sbErr, sbError}}},
+    {"Error", sbErrorState,             {{sbAny, sbError}}}
 };
 
 
