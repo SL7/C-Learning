@@ -73,7 +73,7 @@ sbTransition sbFlightStartState(void) {
 }
 
 sbTransition sbAscendState(void) {
-    int err = 1;
+    int err = 0;
     printf("Ascend State\n");
     if (err == 0) {
         return sbAscendOK;
