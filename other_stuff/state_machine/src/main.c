@@ -2,11 +2,13 @@
 #include <stdlib.h>
 #include "sb_fsm.h"
 #include <unistd.h>
+#include <assert.h>
 
 void delay(unsigned long ms);
 
 int main(void) {
     
+    assert(sizeof(states)/sizeof(*states) == sbStatesSize);
     sbState curr_state = sbIdle;  
     
     sbTransition (*run_func)(void);

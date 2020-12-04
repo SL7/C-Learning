@@ -5,7 +5,7 @@
  * Transition codes
  * used to navigate from current to the next state
  */
-typedef enum state_transitions {
+typedef enum {
     sbStartupTrans,
     sbSelfTestTrans,
     sbStartupOK,
@@ -18,11 +18,11 @@ typedef enum state_transitions {
     sbEndOK,
     sbAny,
     sbRepeat
-}sbTransition;
+} sbTransition;
 /**
  * State Definitions
  */
-typedef enum states {
+typedef enum {
     sbIdle,
     sbSelfTest,
     sbStartup,
@@ -32,6 +32,7 @@ typedef enum states {
     sbRecovery,
     sbError,
     sbEnd,
+    sbStatesSize
 } sbState;
 
 /**
@@ -49,8 +50,8 @@ typedef struct state_trans {
  * @param func - Function Handler of the State
  * @param transitions - Allowed Transition definitions 
  */
-typedef struct state_def {
-    char name[255];
+typedef struct {
+    char *name;
     sbTransition (*func)(void);
     sbStateTrans transitions[16];
 }sbStateDef;
@@ -70,16 +71,16 @@ sbState fetchNextState(sbState, sbTransition);
 /**
  * Structure: {<state name>, <function pointer> , transitions{{<encounters> -> <state>}}
  */
-static sbStateDef states[9] = {
-    {"Idle", sbIdleState,                {{sbStartupTrans, sbStartup}, {sbSelfTestTrans, sbSelfTest}}},
-    {"Self Test", sbSelfTestState,       {{sbStartupTrans, sbStartup}, {sbErr, sbIdle}}},
-    {"Startup", sbStartupState,          {{sbStartupOK, sbFlightStart}, {sbErr, sbIdle}}},
-    {"Flight Start", sbFlightStartState, {{sbFlightStartOK, sbAscend}, {sbErr, sbError}}},
-    {"Ascend", sbAscendState,            {{sbAscendOK, sbDescend}, {sbErr, sbError}, {sbRepeat, sbAscend}}},
-    {"Descend", sbDescendState,          {{sbDescendOK, sbRecovery}, {sbErr, sbError}, {sbRepeat, sbDescend}}},
-    {"Recovery", sbRecoveryState,        {{sbRecoveryOK, sbEnd}, {sbErr, sbError}, {sbRepeat, sbRecovery}}},
-    {"Error", sbErrorState,              {{sbRepeat, sbError}}},
-    {"End", sbEndState,                  {}}
+static const sbStateDef states[] = {
+    [sbIdle] = {"Idle", sbIdleState,                {{sbStartupTrans, sbStartup}, {sbSelfTestTrans, sbSelfTest}}},
+    [sbSelfTest] = {"Self Test", sbSelfTestState,       {{sbStartupTrans, sbStartup}, {sbErr, sbIdle}}},
+    [sbStartup] = {"Startup", sbStartupState,          {{sbStartupOK, sbFlightStart}, {sbErr, sbIdle}}},
+    [sbFlightStart] = {"Flight Start", sbFlightStartState, {{sbFlightStartOK, sbAscend}, {sbErr, sbError}}},
+    [sbAscend] = {"Ascend", sbAscendState,            {{sbAscendOK, sbDescend}, {sbErr, sbError}, {sbRepeat, sbAscend}}},
+    [sbDescend] = {"Descend", sbDescendState,          {{sbDescendOK, sbRecovery}, {sbErr, sbError}, {sbRepeat, sbDescend}}},
+    [sbRecovery] = {"Recovery", sbRecoveryState,        {{sbRecoveryOK, sbEnd}, {sbErr, sbError}, {sbRepeat, sbRecovery}}},
+    [sbError] = {"Error", sbErrorState,              {{sbRepeat, sbError}}},
+    [sbEnd] = {"End", sbEndState,                  {}}
 };
 
 
