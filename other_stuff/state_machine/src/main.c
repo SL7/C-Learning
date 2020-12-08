@@ -21,7 +21,6 @@ int main(void) {
 
     return 0;
 }
-
 void delay(unsigned long ms) {
     usleep(ms * 1000);
 }
