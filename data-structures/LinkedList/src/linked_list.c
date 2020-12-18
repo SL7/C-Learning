@@ -15,11 +15,12 @@ LinkedList *newLinkedList() {
 void showLL(LinkedList *list) {
     int i = 0;
     Node *cur = list->head; 
+    printf("|");
     if (cur == NULL) {
         printf(" NULL |");
     }
     while(cur) {
-        printf(" %d <->", cur->val);
+        printf(" %d |", cur->val);
         cur = cur->next;
     }
     printf("\n");

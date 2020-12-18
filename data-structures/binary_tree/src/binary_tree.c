@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-binaryTree *BinaryTree(int data) {
+BinaryTree_t *BinaryTree(int data) {
     return NULL;
 }
 

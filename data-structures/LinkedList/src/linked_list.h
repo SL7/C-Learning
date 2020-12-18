@@ -18,7 +18,10 @@ int insertHead(LinkedList *list, int data);
 int insertTail(LinkedList *list, int data);
 int getAt(LinkedList *list, int index);
 void showLL(LinkedList *list);
+void showReversedLL(LinkedList *list);
 int deleteAt(LinkedList *list, int index);
 int getSize(LinkedList *list);
+int reverse(LinkedList *list);
+
 
 #endif
