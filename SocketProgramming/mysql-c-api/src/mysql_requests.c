@@ -148,3 +148,70 @@ void moviedata_put(void) {
 }
 
 
+void moviedata_remove(void) {
+    char del[255], temp[4];
+    char *item[] = {"title", "actor", "fsk", "year"};
+    char *ptr;
+    char *str[5], *query = '\0';
+    int selection, i, size = 0;
+    unsigned long affected;
+
+    printf("How do you want to delete the data?\n");
+    printf("[1] = Title [2]=Actor [3]=FSK [4]Date = []\b\b");
+    fgets(temp,3,stdin);
+    if ((ptr = strchr(temp, '\n')) != NULL)
+        *ptr = '\0';
+    sscanf(temp, "%d", &selection);
+
+    str[0] = "DELETE FROM moviedata WHERE ";
+    if (selection > 0 && selection < 5) {
+        str[1] = malloc(strlen(item[selection-1]+1);
+        strcpy(str[1], item[selection-1]);
+    } else {
+        printf("No such Selection\n");
+        return ;
+    }
+    str[2] = " = '";
+    printf("Make Selection for \'%s\': ", item[selection-1]);
+    fgets(del, 254, stdin);
+    if ((ptr = strchr(del, '\n')) != NULL)
+        *ptr = '\0';
+    str[3] = malloc(strlen(del) + 1);
+    strcpy(str[3], del);
+    str[4] = "'";
+
+    for(i = 0; i < 5; i++) {
+        size += strlen(str[i]);
+    }
+    mysql_real_query(sql, query, strlen(query));
+    check_error();
+    if ((affected=(unsigned long)mysql_affected_rows(sql)) <= 0) {
+        printf("no data was affected\n");
+        check_error();
+    } else {
+        printf("%ld data affected\n", affected);
+    }
+    free(query);
+}
+
+
+void moviedata_change(void) {
+    
+    char change[255], replace[255], temp[4];
+    char *item[] = {"title", "actor", "fsk", "year"};
+    char *ptr;
+    char *str[8], *query;
+    int selection1, seletion2, i, size=0;
+    unsigned int integer;
+    unsigned long affected;
+    
+    printf("Which data do you want to change? \n");
+    printf("[1]=Title [2]=Actor [3]=FSK [4]=Date: [] \b\b");
+
+    fgets(temp, 3, stdin );
+    if ((ptr = strchr(temp, '\n')) != NULL) {
+        *ptr = '\0';
+    }
+    sscanf(temp, "%ld", &selection1);
+
+}
