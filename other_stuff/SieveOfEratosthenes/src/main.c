@@ -39,6 +39,7 @@ void sieve_of_eratosthenes(int n) {
             count++;
         }
     }
+
     printf("\n\n[+] took %d milliseconds\n\n", msec%1000);
     free(sieve);
 }
