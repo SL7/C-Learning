@@ -3,6 +3,22 @@
 #include <string.h>
 #include "sb_fsm.h"
 
+/*
+ * Author: SL7
+ * Version: v1.1
+ * 
+ * Changelog:
+ *  |
+ *  |__v1.0:
+ *  |    |__ inital commit
+ *  |
+ *  |__v1.1:
+ *       |__ changed transition array structure
+ *       |__ added command line
+ *       |__ changed states
+ *       |__ added states
+ */
+
 /**
  * Idle state to take commands
  * @returns sbTransition - Transition code
