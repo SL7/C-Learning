@@ -32,7 +32,6 @@ void sieve_of_eratosthenes(int n) {
                     printf("\n");
                     count = 0;
                 }
-                
                 break;
             }
             if (i % sieve[j] == 0) {
